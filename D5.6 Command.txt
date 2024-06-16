@@ -1,0 +1,47 @@
+>>> from news.models import *
+>>> u1 = User.objects.create_user(username='Аня')
+>>> a1=Author.objects.create(user=u1)
+>>> u2 = User.objects.create_user(username='Коля')
+>>> a2=Author.objects.create(user=u2) 
+>>>cat1=Category.objects.create(name='Политика')
+>>> cat2=Category.objects.create(name='Спорт')
+>>> cat3=Category.objects.create(name='Экономика')
+>>> cat4=Category.objects.create(name='Кино')
+>>> p1=Post.objects.create(post_author=a1,choice='NW', title = 'В Госдуме предложили установить на заправках алкотестеры',post_text='«Смысл предложений: для профилактики пьянства за рулем, - пояснил парламентарий. - И для того, чтобы водители чувствовали себя безопасно, спокойно». Возможность провериться, по словам Нилова, должна быть оперативная и общ
+едоступная.')
+>>> p2=Post.objects.create(post_author=a2,choice='AR', title ='Как музыка делает эпическое кино',post_text='Трудно спорить с утверждением, что музыка способна оказывать большое 
+влияние на эмоции и психологическое состояние человека. От колыбельных, которые успокаивают младенцев, до национальных гимнов, которые вселяют гордость, музыка затрагивает наши 
+самые глубокие чувства и воспоминания. В контексте кино музыка служит мощным инструментом: подчёркивает эмоциональный тон сцены, передаёт невысказанные персонажами мысли и усили
+вает воздействие истории на зрителя. Эпические фильмы, с их захватывающими сюжетами и драматическими поворотами, особенно выигрывают от музыкального сопровождения, что усиливает
+ эмоции от той или иной сцены и вызывает психологический резонанс.') 
+>>> p3=Post.objects.create(post_author=a2,choice='AR', title ='Трансферы РПЛ',post_text='Трансферы РПЛ: «Зенит» может перехватить защитника у «Спартака», в «Ростове» новый вратарь')
+>>> post_cat1 = PostCategory.objects.create(post = p1, category = cat1)    
+>>> post_cat2 = PostCategory.objects.create(post = p2, category = cat4)    
+>>> post_cat3 = PostCategory.objects.create(post = p3, category = cat2) 
+>>> post_cat1 = PostCategory.objects.create(post = p1, category = cat3)  
+>>> post_cat2 = PostCategory.objects.create(post = p2, category = cat1) 
+>>> post_cat3 = PostCategory.objects.create(post = post3, category = cat4) 
+>>> comm1 = Comment.objects.create(comm_post = p1, comm_user = u2, comm_text = 'Что то новенькое')
+>>> comm1 = Comment.objects.create(comm_post = p2, comm_user = u2, comm_text = 'очень интересная статья')
+>>> comm2 = Comment.objects.create(comm_post = p2, comm_user = u2, comm_text = 'очень интересная статья')
+>>> comm3 = Comment.objects.create(comm_post = p3, comm_user = u1, comm_text = 'футбол уже не тот что раньше')
+>>> comm4 = Comment.objects.create(comm_post = p3, comm_user = u1, comm_text = 'в принципе не слежу за футболом')
+
+>>>p1.like()
+>>>p1.dislike()
+>>> comm3.like()
+>>> comm4.like()
+>>>p2.dislike()
+
+>>>author7.Author.objects.get(pk=7)
+>>>author8.Author.objects.get(pk=8)
+>>>author7.update_rating()
+>>>author8.update_rating()
+>>>author7.rating
+>>>author8.rating
+
+>>>User.objects.order_by('-author__rating').values('username', 'author__rating').first()
+
+>>>best_post = Post.objects.order_by('-rating').first()
+
+
